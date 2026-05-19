@@ -1,8 +1,8 @@
 import ollama
 
 
-def generate_response(query: str, context_chunks: list[str]) -> str:
-    context = "\n\n".join(context_chunks)
+def generate_response(query: str, context_chunks: list[dict]) -> str:
+    context = "\n\n".join([chunk["text"] for chunk in context_chunks])
 
     prompt = f"""
 You are a document-grounded assistant.

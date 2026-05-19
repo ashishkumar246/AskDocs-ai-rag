@@ -11,12 +11,21 @@ def retrieve_relevant_chunks(query: str, top_k: int = 3, max_distance: float = 1
     )
 
     documents = results["documents"][0]
+    metadatas = results["metadatas"][0]
     distances = results["distances"][0]
 
-    filtered_chunks = []
+    retrieved_chunks = []
 
-    for doc, distance in zip(documents, distances):
+    for document, metadata, distance in zip(documents, metadatas, distances):
+
         if distance <= max_distance:
-            filtered_chunks.append(doc)
 
-    return filtered_chunks
+            retrieved_chunks.append({
+                "text": document,
+                "source_file": metadata["source_file"],
+                "page_number": metadata["page_number"],
+                "chunk_index": metadata["chunk_index"],
+                "distance": distance
+            })
+
+    return retrieved_chunks

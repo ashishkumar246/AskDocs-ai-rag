@@ -11,6 +11,7 @@ router = APIRouter()
 class QuestionRequest(BaseModel):
     question: str
 
+
 @router.post("/ask")
 def ask_question(request: QuestionRequest):
     chunks = retrieve_relevant_chunks(request.question)
@@ -25,15 +26,18 @@ def ask_question(request: QuestionRequest):
 
     answer = generate_response(request.question, chunks)
 
+    sources = []
+
+    for chunk in chunks:
+        sources.append({
+            "source_file": chunk["source_file"],
+            "page_number": chunk["page_number"],
+            "chunk_index": chunk["chunk_index"],
+            "distance": round(chunk["distance"], 3)
+        })
+
     return {
         "question": request.question,
         "answer": answer,
-        "sources_used": chunks
+        "sources_used": sources
     }
-
-
-
-
-
-
-

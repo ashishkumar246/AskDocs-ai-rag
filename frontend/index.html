@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nutrition AI Assistant</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <main class="app-container">
+        <section class="hero">
+            <div class="badge">Multi-PDF RAG Assistant</div>
+            <h1>Nutrition AI Assistant</h1>
+            <p>
+                Ask questions from Harvard and WHO nutrition research PDFs.
+                The system retrieves relevant document context and shows source PDF + page number.
+            </p>
+        </section>
+
+        <section class="question-card">
+            <label for="questionInput">Ask a question</label>
+
+            <textarea 
+                id="questionInput" 
+                placeholder="Example: What drinks are healthiest according to the guide?"
+            ></textarea>
+
+            <button id="askBtn">Ask Question</button>
+        </section>
+
+        <section class="result-card hidden" id="resultCard">
+            <h2>Answer</h2>
+            <p id="answerText"></p>
+
+            <h3>Sources Used</h3>
+            <div id="sourcesList"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -5,7 +5,7 @@ def generate_response(query: str, context_chunks: list[dict]) -> str:
     context = "\n\n".join([chunk["text"] for chunk in context_chunks])
 
     prompt = f"""
-You are a document-grounded assistant.
+You are an exper Nutrition AI assistant.
 
 Your job:
 Answer the user's question using ONLY the provided document context.

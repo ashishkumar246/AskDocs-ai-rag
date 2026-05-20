@@ -17,7 +17,7 @@ def ask_question(request: QuestionRequest):
     chunks = retrieve_relevant_chunks(request.question)
 
     if not chunks:
-        answer = "I could not find that information in the document."
+        answer = "I could not find that information in the document." #threshhold lagana ha 
         return {
             "question": request.question,
             "answer": answer,

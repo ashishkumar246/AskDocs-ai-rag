@@ -6,3 +6,5 @@ pypdf
 ollama
 python-dotenv
 langchain-text-splitters
+streamlit
+requests

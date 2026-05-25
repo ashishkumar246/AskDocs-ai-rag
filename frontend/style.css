@@ -42,6 +42,7 @@ body {
     line-height: 1.6;
 }
 
+.upload-card,
 .question-card,
 .result-card {
     background: #111827;
@@ -49,6 +50,25 @@ body {
     border-radius: 18px;
     padding: 24px;
     margin-bottom: 24px;
+}
+
+.upload-card h2 {
+    margin-bottom: 10px;
+}
+
+.upload-card p {
+    color: #cbd5e1;
+    line-height: 1.5;
+    margin-bottom: 14px;
+}
+
+input[type="file"] {
+    width: 100%;
+    border: 1px dashed #334155;
+    border-radius: 12px;
+    background: #020617;
+    color: #cbd5e1;
+    padding: 14px;
 }
 
 label {
@@ -89,6 +109,15 @@ button {
 
 button:hover {
     background: #16a34a;
+}
+
+.secondary-button {
+    background: #334155;
+    color: #f8fafc;
+}
+
+.secondary-button:hover {
+    background: #475569;
 }
 
 .result-card h2,

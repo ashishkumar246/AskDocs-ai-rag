@@ -4,9 +4,38 @@ import chromadb
 
 client = chromadb.PersistentClient(path="chroma_storage")
 
-collection = client.get_or_create_collection(
-    name="medical_rag"
-)
+
+DEFAULT_COLLECTION_NAME = "medical_rag"
+
+
+def get_collection(collection_name: str = DEFAULT_COLLECTION_NAME):
+    return client.get_or_create_collection(
+        name=collection_name
+    )
+
+
+def collection_exists(collection_name: str) -> bool:
+    try:
+        client.get_collection(name=collection_name)
+        return True
+    except Exception:
+        return False
+
+
+def delete_collection(collection_name: str):
+    if collection_name == DEFAULT_COLLECTION_NAME:
+        raise ValueError("Default collection cannot be deleted.")
+
+    try:
+        client.delete_collection(name=collection_name)
+    except Exception as exc:
+        print(f"Could not delete collection {collection_name}: {exc}")
+
+
+def delete_user_upload_collections():
+    for collection in client.list_collections():
+        if collection.name.startswith("user_upload_"):
+            delete_collection(collection.name)
 
 
 def generate_chunk_id(source_file: str, page_number: int, chunk: str) -> str:
@@ -17,8 +46,11 @@ def generate_chunk_id(source_file: str, page_number: int, chunk: str) -> str:
 def store_embeddings(
     chunks: list[str],
     embeddings: list[list[float]],
-    metadatas: list[dict]
+    metadatas: list[dict],
+    collection_name: str = DEFAULT_COLLECTION_NAME
 ):
+    collection = get_collection(collection_name)
+
     ids = [
         generate_chunk_id(
             metadata["source_file"],
@@ -54,4 +86,4 @@ def store_embeddings(
         metadatas=new_metadatas
     )
 
-    print(f"Stored {len(new_chunks)} new embeddings.")
+    print(f"Stored {len(new_chunks)} new embeddings in collection: {collection_name}")

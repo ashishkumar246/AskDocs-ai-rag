@@ -3,19 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nutrition AI Assistant</title>
+    <title>AskDocs AI</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
     <main class="app-container">
         <section class="hero">
-            <div class="badge">Multi-PDF RAG Assistant</div>
-            <h1>Nutrition AI Assistant</h1>
+            <div class="badge">Document RAG Assistant</div>
+            <h1>AskDocs AI</h1>
             <p>
-                Ask questions from Harvard and WHO nutrition research PDFs.
-                The system retrieves relevant document context and shows source PDF + page number.
+                Ask questions from the default knowledge base, or upload your own PDFs and get answers grounded only in those documents.
             </p>
+        </section>
+
+        <section class="upload-card">
+            <h2>Upload Your PDFs</h2>
+            <p>
+                Upload one or more PDF files. After upload, answers will be generated only from your uploaded documents.
+            </p>
+
+            <input 
+                type="file" 
+                id="pdfInput" 
+                multiple 
+                accept=".pdf"
+            >
+
+            <button id="uploadBtn">Upload PDFs</button>
+            <button id="clearUploadBtn" class="secondary-button hidden">
+                Done With Uploaded PDFs
+            </button>
+
+            <p id="uploadStatus"></p>
         </section>
 
         <section class="question-card">
@@ -23,7 +43,7 @@
 
             <textarea 
                 id="questionInput" 
-                placeholder="Example: What drinks are healthiest according to the guide?"
+                placeholder="Example: What is this document about?"
             ></textarea>
 
             <button id="askBtn">Ask Question</button>
@@ -38,6 +58,6 @@
         </section>
     </main>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=6"></script>
 </body>
 </html>
